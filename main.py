@@ -35,7 +35,7 @@ class Category(db.Model):
     tools = db.relationship('Tool', secondary='tool_category', back_populates='categories')
 
 
-class User():
+class User(db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
@@ -48,15 +48,15 @@ class ToolCategory(db.Model):
     tool_id = db.Column(db.Integer, db.ForeignKey('tools.tool_id'), primary_key=True)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.category_id'), primary_key=True)
 
-# class Review(db.Model):
-#     __tablename__ = 'reviews'
-#     review_id = db.Column(db.Integer, primary_key=True)
-#     tool_id = db.Column(db.Integer, db.ForeignKey('tools.tool_id'), nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-#     rating = db.Column(db.Float, nullable=False)
-#     comment = db.Column(db.Text, nullable=True)
-#     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-#     tool = db.relationship('Tool', back_populates='reviews')
+class Review(db.Model):
+    __tablename__ = 'reviews'
+    review_id = db.Column(db.Integer, primary_key=True)
+    tool_id = db.Column(db.Integer, db.ForeignKey('tools.tool_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+    comment = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    tool = db.relationship('Tool', back_populates='reviews')
 
 
 
