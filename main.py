@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
 
 
 # create the app
@@ -79,16 +80,19 @@ class Review(db.Model):
 
 
 
-
+# Create all databases
 with app.app_context():
     db.create_all()
 
 
-@app.route('/home')
+
+
+
+@app.route('/')
 def home():
-    return 'Welcome Home'
+    return render_template('index.html')
 
 
-
+# launch the flask app
 if __name__ == '__main__':
     app.run(debug=True)
